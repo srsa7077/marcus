@@ -6,6 +6,12 @@
     <semanticResources>http://www.eclipse.org/emf/2002/Ecore</semanticResources>
     <semanticResources>CasaInteligente.ecore</semanticResources>
     <semanticResources>CasaInteligente.genmodel</semanticResources>
+    <semanticResources>model.xsd</semanticResources>
+    <semanticResources>platform:/plugin/org.eclipse.emf.ecore/model/Ecore.xsd</semanticResources>
+    <semanticResources>bundleentry://814.fwk1851350274/cache/www.w3.org/2001/XMLSchema-instance.xsd</semanticResources>
+    <semanticResources>bundleentry://814.fwk1851350274/cache/www.w3.org/2001/XMLSchema.xsd</semanticResources>
+    <semanticResources>http://www.w3.org/2001/xml.xsd</semanticResources>
+    <semanticResources>bundleentry://814.fwk1851350274/cache/www.w3.org/2001/MagicXMLSchema.xsd</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_JiQf0E7uEfC__KMivsOYXw">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Review']"/>
     </ownedViews>

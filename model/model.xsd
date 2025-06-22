@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:model="http://www.example.org/model" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ecore:nsPrefix="model" ecore:package="model" targetNamespace="http://www.example.org/model">
+  <xsd:import namespace="http://www.eclipse.org/emf/2002/Ecore" schemaLocation="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.xsd"/>
+  <xsd:element ecore:ignore="true" name="Casa" type="model:Casa"/>
+  <xsd:element ecore:ignore="true" name="Comodo" type="model:Comodo"/>
+  <xsd:element ecore:ignore="true" name="Dispositivo" type="model:Dispositivo"/>
+  <xsd:element ecore:ignore="true" name="Sensor" type="model:Sensor"/>
+  <xsd:element ecore:ignore="true" name="Atuador" type="model:Atuador"/>
+  <xsd:element ecore:ignore="true" name="AcaoDispositivo" type="model:AcaoDispositivo"/>
+  <xsd:element ecore:ignore="true" name="LeituraSensor" type="model:LeituraSensor"/>
+  <xsd:element ecore:ignore="true" name="Cenario" type="model:Cenario"/>
+  <xsd:element ecore:ignore="true" name="Regra" type="model:Regra"/>
+  <xsd:element ecore:ignore="true" name="Condicao" type="model:Condicao"/>
+  <xsd:complexType name="Casa">
+    <xsd:sequence>
+      <xsd:element ecore:resolveProxies="true" maxOccurs="unbounded" name="comodos" type="model:Comodo"/>
+    </xsd:sequence>
+    <xsd:attribute name="nome" type="ecore:EString"/>
+    <xsd:attribute name="endereco" type="ecore:EString"/>
+  </xsd:complexType>
+  <xsd:complexType name="Comodo">
+    <xsd:sequence>
+      <xsd:element ecore:resolveProxies="true" maxOccurs="unbounded" minOccurs="0" name="dispositivos" type="model:Dispositivo"/>
+      <xsd:element ecore:resolveProxies="true" maxOccurs="unbounded" minOccurs="0" name="sensores" type="model:Sensor"/>
+    </xsd:sequence>
+    <xsd:attribute name="nome" type="ecore:EString"/>
+    <xsd:attribute name="tipo" type="ecore:EString"/>
+  </xsd:complexType>
+  <xsd:complexType name="Dispositivo">
+    <xsd:attribute name="id" type="ecore:EString"/>
+    <xsd:attribute name="nome" type="ecore:EString"/>
+    <xsd:attribute name="modelo" type="ecore:EString"/>
+    <xsd:attribute ecore:unsettable="false" name="status" type="ecore:EBoolean"/>
+  </xsd:complexType>
+  <xsd:complexType name="Sensor">
+    <xsd:complexContent>
+      <xsd:extension base="model:Dispositivo">
+        <xsd:attribute name="tipoSensor" type="ecore:EString"/>
+        <xsd:attribute name="valorAtual" type="ecore:EString"/>
+        <xsd:attribute name="unidade" type="ecore:EString"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="Atuador">
+    <xsd:complexContent>
+      <xsd:extension base="model:Dispositivo">
+        <xsd:attribute name="tipoAtuador" type="ecore:EString"/>
+        <xsd:attribute name="estadoAtual" type="ecore:EString"/>
+        <xsd:attribute ecore:reference="model:AcaoDispositivo" name="acaodispositivo">
+          <xsd:simpleType>
+            <xsd:list itemType="xsd:anyURI"/>
+          </xsd:simpleType>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="AcaoDispositivo">
+    <xsd:attribute ecore:reference="model:Atuador" name="acoesSuportadas" type="xsd:anyURI" use="required"/>
+    <xsd:attribute ecore:reference="model:Cenario" name="acoes" use="required">
+      <xsd:simpleType>
+        <xsd:list itemType="xsd:anyURI"/>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="comando" type="ecore:EString"/>
+    <xsd:attribute name="parametro" type="ecore:EString"/>
+  </xsd:complexType>
+  <xsd:complexType name="LeituraSensor">
+    <xsd:sequence>
+      <xsd:element ecore:resolveProxies="true" maxOccurs="unbounded" minOccurs="0" name="leituras" type="model:Sensor"/>
+    </xsd:sequence>
+    <xsd:attribute name="valor" type="ecore:EString"/>
+    <xsd:attribute name="timestamp" type="ecore:EDate"/>
+  </xsd:complexType>
+  <xsd:complexType name="Cenario">
+    <xsd:attribute name="nome" type="ecore:EString"/>
+    <xsd:attribute name="descricao" type="ecore:EString"/>
+  </xsd:complexType>
+  <xsd:complexType name="Regra">
+    <xsd:sequence>
+      <xsd:element ecore:resolveProxies="true" maxOccurs="unbounded" name="condicoes" type="model:Condicao"/>
+      <xsd:element ecore:resolveProxies="true" maxOccurs="unbounded" name="acaodispositivo" type="model:AcaoDispositivo"/>
+    </xsd:sequence>
+    <xsd:attribute name="nome" type="ecore:EString"/>
+    <xsd:attribute ecore:unsettable="false" name="ativada" type="ecore:EBoolean"/>
+  </xsd:complexType>
+  <xsd:complexType name="Condicao">
+    <xsd:attribute name="operador" type="ecore:EString"/>
+    <xsd:attribute name="valorComparacao" type="ecore:EString"/>
+    <xsd:attribute ecore:reference="model:Sensor" name="sensorAlvo" type="xsd:anyURI" use="required"/>
+  </xsd:complexType>
+</xsd:schema>
