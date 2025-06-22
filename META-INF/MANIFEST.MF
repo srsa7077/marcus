@@ -1,7 +1,16 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: br.com.casaInteligente.model
-Bundle-SymbolicName: br.com.casaInteligente.model; singleton:=true
+Bundle-Name: %pluginName
+Bundle-SymbolicName: br.com.casaInteligente.model;singleton:=true
+Automatic-Module-Name: br.com.casaInteligente.model
 Bundle-Version: 0.1.0.qualifier
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: JavaSE-21
+Export-Package: model,
+ model.impl,
+ model.util
 Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.core.runtime
+Bundle-ActivationPolicy: lazy
